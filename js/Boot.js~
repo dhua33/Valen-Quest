@@ -1,0 +1,10 @@
+var Valin = {};
+Valin.Boot = function(game) {};
+Valin.Boot.prototype = {
+		function preload() {
+				this.load.image('loading', 'assets/loading.png');
+		},
+		function create() {
+				this.input.maxPointers = 1;
+		}
+};

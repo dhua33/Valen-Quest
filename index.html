@@ -3,8 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>Quest for Gold and Girl</title>
-    <script src="js/phaser.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/phaser.min.js"></script>
+    <script src="js/Boot.js"></script>
+    <script src="js/Preloader.js"></script>
+    <script src="js/MainMenu.js"></script>
+    <script src="js/Game.js"></script>
 
 <style>
 body
@@ -20,60 +23,73 @@ body
 
 </head>
 <body>
+<script>
+(function() {
+		var game = new Phaser.Game( 800, 600, Phaser.AUTO, 'game');
+    game.state.add('Boot', boot);
+    game.state.add('Preloader', preloader);
+    game.state.add('MainMenu', mainmenu);
+    game.state.add('Game', main);
+    game.state.start('Boot');
+    })();
+</script>
 <div id="game"></div>
 <div id="readme">
-<h2>Valin Quest</h2>
+<h2>Valen Quest</h2>
 <ul>
 
 <li><strong>High Concept:</strong>
-
+A simple turn-based RPG with a Valentine's Day themed story.
 </li>
 
 <li><strong>Player Experience Goals:</strong>
-
+Experience the joy of turn-based RPG gameplay in its simplest form.
 </li>
 
 <li><strong>Genre:</strong>
-
+Turn-based Menu RPG
 </li>
 
 <li><strong>Game play:</strong>
-
+Use the mouse to navigate menus, buy items and equipment, and select battle actions. In battle, selecting the 'counter' action gives you a 50% chance of deflecting enemy attack and retaliating with your own attack. Attacking subtracts player's attack stat from the enemy's HP. Running will end the battle and send the player back to town. The player can buy items and equipment at the shop or choose to battle a monster. The goal is to accumulate enough gold to buy the ring in the shop. If the player gets the ring or dies, the game is over.
 </li>
 
 <li><strong>Prototype goal:</strong>
-
+Explore game states and menu navigation, as well as light RPG mechanics.
 </li>
 
 <li><strong>Features:</strong>
-
+Simple turn-based RPG gameplay.
 </li>
 
 <li><strong>Setting/Premise:</strong>
-
+A simple town where the player needs to quickly gain money to buy a ring by defeating monsters.
 </li>
 
 <li><strong>Story:</strong>
-
+You want to buy a ring for your lover, but you don't have enough money! Valentine's Day is around the corner, and the fastest way to get money is killing monsters. Harder monsters give you more money, so save up, get better equipment, and get that ring!
 </li>
 
 <li><strong>Target Audience:</strong>
-
+Everyone 10 and up who has interest in turn-based RPGs, flash games, or Valentine's Day.
 </li>
 
 <li><strong>Play time:</strong>
-
+5-10 mins.
 </li>
 
 <li><strong>Strategies:</strong>
-
+Start small and try to build up money, buying better equipment and potions when necessary. Don't overestimate your own vitality and be prepared with potions.
 </li>
 
 <li><strong>Prototype Assets:</strong>
+Valin quest logos, texts, and loading screen created from http://www.webestools.com/web20-title-generator-logo-title-maker-online-web20-effect-reflect-free-photoshop.html
 
 </li>
 
 <li><strong>Prototype Closest Other Game:</strong>
+Coding methods taken from http://www.emanueleferonato.com/2014/08/28/phaser-tutorial-understanding-phaser-states/
+http://examples.phaser.io/_site/view_full.html?d=loader&f=load+events.js&t=load%20events
 
 </li>
 
