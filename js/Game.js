@@ -534,7 +534,7 @@ main.prototype = {
 		},
 		buySteel: function() {
 				cost = 1050;
-				hasStat = 500;
+				hasStat = 540;
 				shopGold.visible = false;
 				shopGreet.visible = false;
 				shopNo.visible = false;
