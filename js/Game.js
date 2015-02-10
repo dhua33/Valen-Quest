@@ -594,7 +594,7 @@ main.prototype = {
 		counter: function() {
 				randomNum = Math.random();
 				randomNum = Math.round((randomNum * 100)) % 10;
-				if(randomNum > 0) { // counter failed
+				if(randomNum > 1) { // counter failed
 						rightText.setText("Counter failed.\nPlayer turn.");
 						damage = Math.round(Math.random()*100) % currentMonAtt;
 						if(battleNum === 1) {
