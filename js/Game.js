@@ -495,6 +495,7 @@ main.prototype = {
 						shopGold.visible = true;
 						topText.setText("\nYou don't have enough gold...");
 				} else {
+						shopMusic.stop();
 						buySFX.play();
 						endingMusic.play();
 						win.visible = true;
