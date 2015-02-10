@@ -779,6 +779,7 @@ main.prototype = {
 				// main func
 				
 				// stop music
+				victorySFX.stop();
 				battle1Music.stop();
 				battle2Music.stop();
 				shopMusic.stop();

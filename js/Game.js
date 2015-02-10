@@ -848,9 +848,7 @@ main.prototype = {
 				// main func
 				
 				// stop music
-				battle1Music.stop();
-				battle2Music.stop();
-				shopMusic.stop();
+				this.game.sound.stopAll();
 				
 				back.visible = true;
 				battleBut1.visible = true;
