@@ -920,7 +920,7 @@ main.prototype = {
 				currentMonHP = mon2HP;
 				currentMonAtt = mon2Att;
 				monGold = 300;
-				mon2.animations.play('idle');
+				mon2.animations.play('idle', 20, true, false);
 				
 				// text
 				topText.setText("Monster HP: " + currentMonHP);
