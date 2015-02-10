@@ -160,16 +160,16 @@ main.prototype = {
 				femaleBut = this.add.button(475, 300, 'femaleBut', this.female);
 				
 				// audio
-				attackSFX = this.add.audio('attack');
-				damageSFX = this.add.audio('damage');
-				victorySFX = this.add.audio('victory');
-				townMusic = this.add.audio('town', 1, true);
-				shopMusic = this.add.audio('shop', 1, true);
-				buySFX = this.add.audio('buy');
-				errorSFX = this.add.audio('error');
-				battle1Music = this.add.audio('battle1', 1, true);
-				battle2Music = this.add.audio('battle2', 1, true);
-				endingMusic = this.add.audio('ending');
+				attackSFX = this.add.audio('attack', 0.5);
+				damageSFX = this.add.audio('damage', 0.5);
+				victorySFX = this.add.audio('victory', 0.5);
+				townMusic = this.add.audio('town', 0.5, true);
+				shopMusic = this.add.audio('shop', 0.5, true);
+				buySFX = this.add.audio('buy', 0.5);
+				errorSFX = this.add.audio('error', 0.5);
+				battle1Music = this.add.audio('battle1', 0.5, true);
+				battle2Music = this.add.audio('battle2', 0.5, true);
+				endingMusic = this.add.audio('ending', 0.5);
 				
 				win = this.add.sprite(0, 0, 'win', this.win);
 				die = this.add.button(0, 0, 'die', this.die);
