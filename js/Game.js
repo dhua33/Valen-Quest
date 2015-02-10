@@ -25,6 +25,7 @@ var main = function(game) {
 		var mon3Att;
 		var currentMonHP;
 		var currentMonAtt;
+		var damage;
 		var monGold;
 		var slashFX;
 		var player;
@@ -85,7 +86,7 @@ main.prototype = {
 				playerHP = 5;
 				playerMaxHP = 5;
 				playerAtt = 4;
-				playerGold = 0;
+				playerGold = 10;
 				playerPots = 1;
 				mon1HP = 10;
 				mon1Att = 3;
@@ -129,7 +130,6 @@ main.prototype = {
 				slashFX = this.add.sprite(315, 300, 'slash');
 				slashFX.scale.setTo(2, 2);
 				slashFX.animations.add('attack', [0, 1, 2, 3, 4, 5, 6, 7, 8], 18)
-				
 				// shop face assets
 				shopGold = this.add.sprite(30, 20, 'shopGold');
 				shopGreet = this.add.sprite(30, 20, 'shopGreet');
@@ -171,14 +171,14 @@ main.prototype = {
 				battle2Music = this.add.audio('battle2', 1, true);
 				endingMusic = this.add.audio('ending');
 				
-				win = this.add.sprite(0, 0, 'win');
+				win = this.add.sprite(0, 0, 'win', this.win);
 				die = this.add.button(0, 0, 'die', this.die);
 				this.allVisible();
 				// begin selection
 				topText.setText("\n                 Are you a Boy or a Girl?");
 				
 		},
-		// misc functions to reduce coding
+		// misc functions to reduce coding DOES NOT WORK 2/9/2015
 		allVisible: function() { // sets all buttons to be invisible and resets text
 				// action buttons
 				backTown.visible = false;
@@ -288,6 +288,8 @@ main.prototype = {
 				townimg.visible = true;
 				
 				// updates playerText
+				rightText.visible = true;
+				rightText.setText("Max HP: " + playerMaxHP);
 				playerText.visible = true;
 				playerText.setText(" " + playerHP + "                      " + playerGold + "\n\n     " + playerAtt + "                      " + playerPots);
 		},
@@ -353,62 +355,431 @@ main.prototype = {
 				townimg.visible = true;
 				
 				// updates playerText
+				rightText.visible = true;
+				rightText.setText("Max HP: " + playerMaxHP);
 				playerText.visible = true;
 				playerText.setText(" " + playerHP + "                      " + playerGold + "\n\n     " + playerAtt + "                      " + playerPots);
 		},
 		
 		//shop buttons
-		shop: function() {
+		shop: function() { 
+				// change music
+				townMusic.stop();
+				shopMusic.play();
 				
+				// initialize visuals
+				townimg.visible = false;
+				battleBut1.visible = false;
+				battleBut2.visible = false;
+				battleBut3.visible = false;
+				shopBut.visible = false;
+				actionText.visible = false;
+				
+				backTown.visible = true;
+				shopGreet.visible = true;
+				shopmenu.visible = true;
+				topText.setText("Welcome to the shop!\nSee anything you like?");
+				buySword.visible = true;
+				buySpear.visible = true;
+				buyAxe.visible = true;
+				buyIron.visible = true;
+				buySteel.visible = true;
+				buyPlate.visible = true;
+				buyPot.visible = true;
+				buyRing.visible = true;
 		},
-		buySword: function() {
+		buySword: function() { // initialize vals
+				cost = 200;
+				hasStat = 10;
+				shopGold.visible = false;
+				shopGreet.visible = false;
+				shopNo.visible = false;
+				shopThank.visible = false;
 				
+				if(cost > playerGold) {
+						errorSFX.play();
+						shopGold.visible = true;
+						topText.setText("\nYou don't have enough gold...");
+				} else if (hasStat <= playerAtt) {
+						errorSFX.play();
+						shopNo.visible = true;
+						topText.setText("\nBuying another would be useless!");
+				} else {
+						buySFX.play();
+						shopThank.visible = true;
+						topText.setText("\nThank you~\nNow you're a bit stronger");
+						playerGold -= cost;
+						playerAtt = hasStat;
+						playerText.setText(" " + playerHP + "                      " + playerGold + "\n\n     " + playerAtt + "                      " + playerPots);
+				}
 		},
 		buySpear: function() {
+				cost = 1000;
+				hasStat = 50;
+				shopGold.visible = false;
+				shopGreet.visible = false;
+				shopNo.visible = false;
+				shopThank.visible = false;
 				
+				if(cost > playerGold) {
+						errorSFX.play();
+						shopGold.visible = true;
+						topText.setText("\nYou don't have enough gold...");
+				} else if (hasStat <= playerAtt) {
+						errorSFX.play();
+						shopNo.visible = true;
+						topText.setText("\nBuying another would be useless!");
+				} else {
+						buySFX.play();
+						shopThank.visible = true;
+						topText.setText("\nThanks!\nGood luck hunting~");
+						playerGold -= cost;
+						playerAtt = hasStat;
+						playerText.setText(" " + playerHP + "                      " + playerGold + "\n\n     " + playerAtt + "                      " + playerPots);
+				}
 		},
 		buyAxe: function() {
+				cost = 5000;
+				hasStat = 300;
+				shopGold.visible = false;
+				shopGreet.visible = false;
+				shopNo.visible = false;
+				shopThank.visible = false;
 				
+				if(cost > playerGold) {
+						errorSFX.play();
+						shopGold.visible = true;
+						topText.setText("\nYou don't have enough gold...");
+				} else if (hasStat <= playerAtt) {
+						errorSFX.play();
+						shopNo.visible = true;
+						topText.setText("\nBuying another would be useless!");
+				} else {
+						buySFX.play();
+						shopThank.visible = true;
+						topText.setText("\nThank you very much!\nYou have the best weapon in town.");
+						playerGold -= cost;
+						playerAtt = hasStat;
+						playerText.setText(" " + playerHP + "                      " + playerGold + "\n\n     " + playerAtt + "                      " + playerPots);
+				}
 		},
 		buyPot: function() {
+				cost = 100;
+				shopGold.visible = false;
+				shopGreet.visible = false;
+				shopNo.visible = false;
+				shopThank.visible = false;
 				
+				if(cost > playerGold) {
+						errorSFX.play();
+						shopGold.visible = true;
+						topText.setText("\nYou don't have enough gold...");
+				} else {
+						buySFX.play();
+						shopThank.visible = true;
+						topText.setText("\nThank you.\nKeep your health high!");
+						playerGold -= cost;
+						playerPots++;
+						playerText.setText(" " + playerHP + "                      " + playerGold + "\n\n     " + playerAtt + "                      " + playerPots);
+				}
 		},
 		buyRing: function() {
+				cost = 20000;
+				shopGold.visible = false;
+				shopGreet.visible = false;
+				shopNo.visible = false;
+				shopThank.visible = false;
 				
+				if(cost > playerGold) {
+						errorSFX.play();
+						shopGold.visible = true;
+						topText.setText("\nYou don't have enough gold...");
+				} else {
+						buySFX.play();
+						endingMusic.play();
+						win.visible = true;
+				}
 		},
 		buyIron: function() {
+				cost = 350;
+				hasStat = 15;
+				shopGold.visible = false;
+				shopGreet.visible = false;
+				shopNo.visible = false;
+				shopThank.visible = false;
 				
+				if(cost > playerGold) {
+						errorSFX.play();
+						shopGold.visible = true;
+						topText.setText("\nYou don't have enough gold...");
+				} else if (hasStat <= playerHP) {
+						errorSFX.play();
+						shopNo.visible = true;
+						topText.setText("\nBuying another would be useless!");
+				} else {
+						buySFX.play();
+						shopThank.visible = true;
+						topText.setText("\nThanks~\nDo your best with that armor!");
+						playerGold -= cost;
+						playerHP = hasStat;
+						playerMaxHP = hasStat;
+						rightText.setText("Max HP: " + playerMaxHP);
+						playerText.setText(" " + playerHP + "                      " + playerGold + "\n\n     " + playerAtt + "                      " + playerPots);
+				}
 		},
 		buySteel: function() {
+				cost = 1050;
+				hasStat = 45;
+				shopGold.visible = false;
+				shopGreet.visible = false;
+				shopNo.visible = false;
+				shopThank.visible = false;
 				
+				if(cost > playerGold) {
+						errorSFX.play();
+						shopGold.visible = true;
+						topText.setText("\nYou don't have enough gold...");
+				} else if (hasStat <= playerHP) {
+						errorSFX.play();
+						shopNo.visible = true;
+						topText.setText("\nBuying another would be useless!");
+				} else {
+						buySFX.play();
+						shopThank.visible = true;
+						topText.setText("\nThank you~\nYou can take a hit in that armor.");
+						playerGold -= cost;
+						playerHP = hasStat;
+						playerMaxHP = hasStat;
+						rightText.setText("Max HP: " + playerMaxHP);
+						playerText.setText(" " + playerHP + "                      " + playerGold + "\n\n     " + playerAtt + "                      " + playerPots);
+				}
 		},
 		buyPlate: function() {
+				cost = 5000;
+				hasStat = 150;
+				shopGold.visible = false;
+				shopGreet.visible = false;
+				shopNo.visible = false;
+				shopThank.visible = false;
 				
-		},
-		buy: function() {
-				
+				if(cost > playerGold) {
+						errorSFX.play();
+						shopGold.visible = true;
+						topText.setText("\nYou don't have enough gold...");
+				} else if (hasStat <= playerHP) {
+						errorSFX.play();
+						shopNo.visible = true;
+						topText.setText("\nBuying another would be useless!");
+				} else {
+						buySFX.play();
+						shopThank.visible = true;
+						topText.setText("\nThank you so much!\nNothing can stop you now.");
+						playerGold -= cost;
+						playerHP = hasStat;
+						playerMaxHP = hasStat;
+						rightText.setText("Max HP: " + playerMaxHP);
+						playerText.setText(" " + playerHP + "                      " + playerGold + "\n\n     " + playerAtt + "                      " + playerPots);
+				}
 		},
 		
 		// action button functions
 		die: function() {
-				
+				this.game.state.start('Game');
 		},
 		counter: function() {
 				randomNum = Math.random();
 				randomNum = Math.round((randomNum * 100)) % 2;
-				
+				if(randomNum > 0) { // counter failed
+						rightText.setText("Counter failed.\nPlayer turn.");
+						damage = Math.round(Math.random()*100) % currentMonAtt;
+						if(battleNum === 1) {
+								mon1.animations.play('attack');
+						} else if(battleNum === 2) {
+								if(damage < 4)
+										damage += 4;
+								mon2.animations.play('attack');
+						} else if(battleNum === 3) {
+								if(damage < 20)
+										damage += 20;
+						}
+						damageSFX.play();
+						damage = Math.round(damage*1.5);
+						playerHP -= damage;
+						topText.setText("Monster HP: "+ currentMonHP + "\nMonster attacked for " + damage + " damage.");
+						if(battleNum === 1) {
+								if(damage < 1)
+										topText.setText("Monster HP: " + currentMonHP + "\nMonster missed!");
+						}
+						if(playerHP < 1){
+								battle1Music.stop();
+								battle2Music.stop();
+								die.visible = true;
+						}
+				} else {
+						slashFX.animations.play('attack');
+						attackSFX.play();
+						rightText.setText("Counter success!\nPlayer did " + playerAtt + " damage.\nPlayer Turn.");
+						currentMonHP -= playerAtt;
+						topText.setText("Monster HP: " + currentMonHP);
+						if(currentMonHP < 1) {
+								topText.setText("You defeated the monster!\nGained "+ monGold + " gold.");
+								battle1Music.stop();
+								battle2Music.stop();
+								victorySFX.play();
+								if(battleNum === 2) {
+										mon2.animations.play('die');
+								}
+								backTown.visible = true;
+								attack.visible = false;
+								counter.visible = false;
+								potion.visible = false;
+								run.visible = false;
+								playerGold += monGold;
+						}
+				}
+				playerText.setText(" " + playerHP + "                      " + playerGold + "\n\n     " + playerAtt + "                      " + playerPots);
 		},
 		attack: function() {
+				damage = Math.round(Math.random()*100) % 10;
+				if (damage > 0) {
+						slashFX.animations.play('attack');
+						attackSFX.play();
+						rightText.setText("Player attacked.\nPlayer did " + playerAtt + " damage.\nPlayer Turn.");
+						currentMonHP -= playerAtt;
+						topText.setText("Monster HP: " + currentMonHP);
+				} else {
+						rightText.setText("Player Missed!\nPlayer turn.");
+				}
+						if(currentMonHP < 1) {
+								topText.setText("You defeated the monster!\nGained "+ monGold + " gold.");
+								battle1Music.stop();
+								battle2Music.stop();
+								victorySFX.play();
+								if(battleNum === 2) {
+										mon2.animations.play('die');
+								}
+								backTown.visible = true;
+								attack.visible = false;
+								counter.visible = false;
+								potion.visible = false;
+								run.visible = false;
+								playerGold += monGold;
+						} else {
+						damage = Math.round(Math.random()*100) % currentMonAtt;
+						if(battleNum === 1) {
+								mon1.animations.play('attack');
+						} else if(battleNum === 2) {
+								if(damage < 4)
+										damage += 4;
+								mon2.animations.play('attack');
+						} else if(battleNum === 3) {
+								if(damage < 20)
+										damage += 20;
+						}
+						damageSFX.play();
+						playerHP -= damage;
+						topText.setText("Monster HP: "+ currentMonHP + "\nMonster attacked for " + damage + " damage.");
+						if(battleNum === 1) {
+								if(damage < 1)
+										topText.setText("Monster HP: " + currentMonHP + "\nMonster missed!");
+						}
+						if(playerHP < 1){
+								battle1Music.stop();
+								battle2Music.stop();
+								die.visible = true;
+						}
+					}
 				
+				playerText.setText(" " + playerHP + "                      " + playerGold + "\n\n     " + playerAtt + "                      " + playerPots);
 		},
 		potion: function() {
-				
+				if(playerPots < 1) {
+						rightText.setText("No potions left.\nChoose another action.");
+				} else if(playerHP === playerMaxHP) {
+						rightText.setText("Player at max HP.\nChoose another action.");
+				} else {
+						playerHP = playerMaxHP;
+						playerPots--;
+						rightText.setText("Player used potion.\nPlayer turn.");
+						damage = Math.round(Math.random()*100) % currentMonAtt;
+						if(battleNum === 1) {
+								mon1.animations.play('attack');
+						} else if(battleNum === 2) {
+								if(damage < 4)
+										damage += 4;
+								mon2.animations.play('attack');
+						} else if(battleNum === 3) {
+								if(damage < 20)
+										damage += 20;
+						}
+						damageSFX.play();
+						playerHP -= damage;
+						topText.setText("Monster HP: "+ currentMonHP + "\nMonster attacked for " + damage + " damage.");
+						if(battleNum === 1) {
+								if(damage < 1)
+										topText.setText("Monster HP: " + currentMonHP + "\nMonster missed!");
+						}
+						if(playerHP < 1){
+								battle1Music.stop();
+								battle2Music.stop();
+								die.visible = true;
+						}
+				}
 		},
-		run: function() {
+		run: function() { // lose 25% gold, then do backTown
+				playerGold = Math.round(playerGold*0.75);
 				
-		},
-		backTown: function() { // for the back to town button
-				this.allVisible();
+				// for the back to town button
+				// this.allVisible();
+				// action buttons
+				backTown.visible = false;
+				attack.visible = false;
+				counter.visible = false;
+				potion.visible = false;
+				run.visible = false;
+				// buy buttons
+				buySword.visible = false;
+				buySpear.visible = false;
+				buyAxe.visible = false;
+				buyPot.visible = false;
+				buyRing.visible = false;
+				buyIron.visible = false;
+				buySteel.visible = false;
+				buyPlate.visible = false;
+				// text
+				actionText.visible = false;
+				topText.setText("");
+				rightText.setText("");
+				// backgrounds and images
+				win.visible = false;
+				die.visible = false;
+				background.visible = false;
+				
+				//this.shopVisible();
+				shopGold.visible = false;
+				shopGreet.visible = false;
+				shopNo.visible = false;
+				shopThank.visible = false;
+				
+				// continue visible
+				shopmenu.visible = false;
+				// buttons
+				shopBut.visible = false;
+				battleBut1.visible = false;
+				battleBut2.visible = false;
+				battleBut3.visible = false;
+				// monsters
+				mon1.visible = false;
+				mon2.visible = false;
+				mon3.visible = false;
+				
+				// main func
+				
+				// stop music
+				battle1Music.stop();
+				battle2Music.stop();
+				shopMusic.stop();
+				
 				back.visible = true;
 				battleBut1.visible = true;
 				battleBut2.visible = true;
@@ -416,14 +787,171 @@ main.prototype = {
 				shopBut.visible = true;
 				topText.setText("Town\nWhat to do now...");
 				actionText.visible = true;
-		},
-		battle1: function() {
+				townMusic.play();
+				townimg.visible = true;
 				
+				playerHP = playerMaxHP;
+				// updates playerText
+				rightText.visible = true;
+				rightText.setText("Max HP: " + playerMaxHP);
+				playerText.visible = true;
+				playerText.setText(" " + playerHP + "                      " + playerGold + "\n\n     " + playerAtt + "                      " + playerPots);
+		},
+		backTown: function() { // for the back to town button
+				// this.allVisible();
+				// action buttons
+				backTown.visible = false;
+				attack.visible = false;
+				counter.visible = false;
+				potion.visible = false;
+				run.visible = false;
+				// buy buttons
+				buySword.visible = false;
+				buySpear.visible = false;
+				buyAxe.visible = false;
+				buyPot.visible = false;
+				buyRing.visible = false;
+				buyIron.visible = false;
+				buySteel.visible = false;
+				buyPlate.visible = false;
+				// text
+				actionText.visible = false;
+				topText.setText("");
+				rightText.setText("");
+				// backgrounds and images
+				win.visible = false;
+				die.visible = false;
+				background.visible = false;
+				
+				//this.shopVisible();
+				shopGold.visible = false;
+				shopGreet.visible = false;
+				shopNo.visible = false;
+				shopThank.visible = false;
+				
+				// continue visible
+				shopmenu.visible = false;
+				// buttons
+				shopBut.visible = false;
+				battleBut1.visible = false;
+				battleBut2.visible = false;
+				battleBut3.visible = false;
+				// monsters
+				mon1.visible = false;
+				mon2.visible = false;
+				mon3.visible = false;
+				
+				// main func
+				
+				// stop music
+				battle1Music.stop();
+				battle2Music.stop();
+				shopMusic.stop();
+				
+				back.visible = true;
+				battleBut1.visible = true;
+				battleBut2.visible = true;
+				battleBut3.visible = true;
+				shopBut.visible = true;
+				topText.setText("Town\nWhat to do now...");
+				actionText.visible = true;
+				townMusic.play();
+				townimg.visible = true;
+				
+				playerHP = playerMaxHP;
+				// updates playerText
+				rightText.visible = true;
+				rightText.setText("Max HP: " + playerMaxHP);
+				playerText.visible = true;
+				playerText.setText(" " + playerHP + "                      " + playerGold + "\n\n     " + playerAtt + "                      " + playerPots);
+		},
+		battle1: function() { // manage music
+				townMusic.stop();
+				battle1Music.play();
+				
+				// initialize visuals
+				townimg.visible = false;
+				battleBut1.visible = false;
+				battleBut2.visible = false;
+				battleBut3.visible = false;
+				shopBut.visible = false;
+				actionText.visible = false;
+				
+				attack.visible = true;
+				potion.visible = true;
+				run.visible = true;
+				counter.visible = true;
+				background.visible = true;
+				mon1.visible = true;
+				
+				// variables
+				battleNum = 1;
+				currentMonHP = mon1HP;
+				currentMonAtt = mon1Att;
+				monGold = 75;
+				
+				// text
+				topText.setText("Monster HP: " + currentMonHP);
+				rightText.setText("Player turn.\nChoose an action.");
 		},
 		battle2: function() {
+				townMusic.stop();
+				battle1Music.play();
 				
+				// initialize visuals
+				townimg.visible = false;
+				battleBut1.visible = false;
+				battleBut2.visible = false;
+				battleBut3.visible = false;
+				shopBut.visible = false;
+				actionText.visible = false;
+				
+				attack.visible = true;
+				potion.visible = true;
+				run.visible = true;
+				counter.visible = true;
+				background.visible = true;
+				mon2.visible = true;
+				
+				// variables
+				battleNum = 2;
+				currentMonHP = mon2HP;
+				currentMonAtt = mon2Att;
+				monGold = 300;
+				mon2.animations.play('idle');
+				
+				// text
+				topText.setText("Monster HP: " + currentMonHP);
+				rightText.setText("Player turn.\nChoose an action.");
 		},
 		battle3: function() {
+				townMusic.stop();
+				battle2Music.play();
+				
+				// initialize visuals
+				townimg.visible = false;
+				battleBut1.visible = false;
+				battleBut2.visible = false;
+				battleBut3.visible = false;
+				shopBut.visible = false;
+				actionText.visible = false;
+				
+				attack.visible = true;
+				potion.visible = true;
+				run.visible = true;
+				counter.visible = true;
+				background.visible = true;
+				mon3.visible = true;
+				
+				// variables
+				battleNum = 3;
+				currentMonHP = mon3HP;
+				currentMonAtt = mon3Att;
+				monGold = 2500;
+				
+				// text
+				topText.setText("Monster HP: " + currentMonHP);
+				rightText.setText("Player turn.\nChoose an action.");
 				
 		}
 }
