@@ -725,6 +725,8 @@ main.prototype = {
 								die.visible = true;
 						}
 				}
+				
+				playerText.setText(" " + playerHP + "                      " + playerGold + "\n\n     " + playerAtt + "                      " + playerPots);
 		},
 		run: function() { // lose 25% gold, then do backTown
 				playerGold = Math.round(playerGold*0.75);
