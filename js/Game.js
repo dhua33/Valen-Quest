@@ -78,22 +78,26 @@ var main = function(game) {
     // variables for battle
     var randomNum;
     var battleNum;
+    var mondie1;
+    var mondie2;
 };
 
 main.prototype = {
 		create: function() {
 				// set initial parameters
-				playerHP = 5;
-				playerMaxHP = 5;
+				playerHP = 10;
+				playerMaxHP = 10;
 				playerAtt = 4;
-				playerGold = 10;
+				playerGold = 100;
 				playerPots = 1;
-				mon1HP = 10;
+				mon1HP = 50;
 				mon1Att = 3;
-				mon2HP = 40;
+				mon2HP = 370;
 				mon2Att = 10; // min 4
-				mon3HP = 200;
+				mon3HP = 7500;
 				mon3Att = 41; // min 20
+				mondie1 = false;
+				mondie2 = false;
 				
 				// set initial button positions, visibility, and functions
 				back = this.add.sprite(0, 0, 'back');
@@ -503,7 +507,7 @@ main.prototype = {
 		},
 		buyIron: function() {
 				cost = 350;
-				hasStat = 15;
+				hasStat = 80;
 				shopGold.visible = false;
 				shopGreet.visible = false;
 				shopNo.visible = false;
@@ -530,7 +534,7 @@ main.prototype = {
 		},
 		buySteel: function() {
 				cost = 1050;
-				hasStat = 45;
+				hasStat = 500;
 				shopGold.visible = false;
 				shopGreet.visible = false;
 				shopNo.visible = false;
@@ -557,7 +561,7 @@ main.prototype = {
 		},
 		buyPlate: function() {
 				cost = 5000;
-				hasStat = 150;
+				hasStat = 1600;
 				shopGold.visible = false;
 				shopGreet.visible = false;
 				shopNo.visible = false;
@@ -589,7 +593,7 @@ main.prototype = {
 		},
 		counter: function() {
 				randomNum = Math.random();
-				randomNum = Math.round((randomNum * 100)) % 2;
+				randomNum = Math.round((randomNum * 100)) % 10;
 				if(randomNum > 0) { // counter failed
 						rightText.setText("Counter failed.\nPlayer turn.");
 						damage = Math.round(Math.random()*100) % currentMonAtt;
@@ -619,16 +623,20 @@ main.prototype = {
 				} else {
 						slashFX.animations.play('attack');
 						attackSFX.play();
-						rightText.setText("Counter success!\nPlayer did " + playerAtt + " damage.\nPlayer Turn.");
-						currentMonHP -= playerAtt;
+						damage = playerAtt*5;
+						rightText.setText("Counter success!\nPlayer did " + damage + " damage.\nPlayer Turn.");
+						currentMonHP -= damage;
 						topText.setText("Monster HP: " + currentMonHP);
 						if(currentMonHP < 1) {
 								topText.setText("You defeated the monster!\nGained "+ monGold + " gold.");
 								battle1Music.stop();
 								battle2Music.stop();
 								victorySFX.play();
+								if(battleNum === 1)
+										mondie1 = true;
 								if(battleNum === 2) {
 										mon2.animations.play('die');
+										mondie2 = true;
 								}
 								backTown.visible = true;
 								attack.visible = false;
@@ -656,8 +664,11 @@ main.prototype = {
 								battle1Music.stop();
 								battle2Music.stop();
 								victorySFX.play();
+								if(battleNum === 1)
+										mondie1 = true;
 								if(battleNum === 2) {
 										mon2.animations.play('die');
+										mondie2 = true;
 								}
 								backTown.visible = true;
 								attack.visible = false;
@@ -854,6 +865,10 @@ main.prototype = {
 				battleBut1.visible = true;
 				battleBut2.visible = true;
 				battleBut3.visible = true;
+				if(mondie1)
+						battleBut1.visible = false;
+				if(mondie2)
+						battleBut2.visible = false;
 				shopBut.visible = true;
 				topText.setText("Town\nWhat to do now...");
 				actionText.visible = true;
@@ -890,7 +905,7 @@ main.prototype = {
 				battleNum = 1;
 				currentMonHP = mon1HP;
 				currentMonAtt = mon1Att;
-				monGold = 75;
+				monGold = 800;
 				
 				// text
 				topText.setText("Monster HP: " + currentMonHP);
@@ -919,7 +934,7 @@ main.prototype = {
 				battleNum = 2;
 				currentMonHP = mon2HP;
 				currentMonAtt = mon2Att;
-				monGold = 300;
+				monGold = 3000;
 				mon2.animations.play('idle', 20, true, false);
 				
 				// text
@@ -949,7 +964,7 @@ main.prototype = {
 				battleNum = 3;
 				currentMonHP = mon3HP;
 				currentMonAtt = mon3Att;
-				monGold = 2500;
+				monGold = 15000;
 				
 				// text
 				topText.setText("Monster HP: " + currentMonHP);
