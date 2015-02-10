@@ -4,6 +4,8 @@ preloader.prototype = {
 		preload: function() {
 				//images
 				var loading = this.add.sprite(0, 0, 'loading');
+				var loadbar = this.add.sprite(0, 440, 'loadbar');
+				this.load.setPreloadSprite(loadbar);
 				this.load.image('title', 'assets/title.png');
 				this.load.image('start', 'assets/start.png');
 				this.load.image('female', 'assets/female1.png');
@@ -18,11 +20,12 @@ preloader.prototype = {
 				this.load.image('shopGreet', 'assets/shopGreet.png');
 				this.load.image('shopNo', 'assets/shopNo.png');
 				this.load.image('shopThank', 'assets/shopThank.png');
+				this.load.image('townimg', 'assets/town.png');
 				//spritesheets
-				this.load.spritesheet('dorver', 'assets/dorver.png');
-				this.load.spritesheet('goblin', 'assets/goblin.png');
-				this.load.spritesheet('ninja', 'assets/ninja.png');
-				this.load.spritesheet('slash', 'assets/slash.png');
+				this.load.spritesheet('dorver', 'assets/dorver.png', 180, 144);
+				this.load.spritesheet('goblin', 'assets/goblin.png', 64, 64);
+				this.load.spritesheet('ninja', 'assets/ninja.png', 100, 100);
+				this.load.spritesheet('slash', 'assets/slash.png', 40, 50);
 				//buttons
 				this.load.image('attack', 'assets/attack.png');
 				this.load.image('potion', 'assets/potion.png');
