@@ -51,7 +51,7 @@ Turn-based Menu RPG
 </li>
 
 <li><strong>Game play:</strong>
-Use the mouse to navigate menus, buy items and equipment, and select battle actions. In battle, selecting the 'counter' action gives you a 50% chance of deflecting enemy attack and retaliating with your own attack. Failing the counter makes the player take 50% more damage. Attacking subtracts player's attack stat from the enemy's HP, but has a 10% miss rate. Running will end the battle and send the player back to town with full health, but the player loses 25% of their total gold. The player can buy items and equipment at the shop or choose to battle a monster. The goal is to accumulate enough gold to buy the ring in the shop. If the player gets the ring or dies, the game is over.
+Use the mouse to navigate menus, buy items and equipment, and select battle actions. In battle, selecting the 'counter' action gives you a 20% chance of deflecting enemy attack and retaliating with 500% damage. Failing the counter makes the player take 50% more damage. Attacking subtracts player's attack stat from the enemy's HP, but has a 10% miss rate. Running will end the battle and send the player back to town with full health, but the player loses 25% of their total gold. The player can buy items and equipment at the shop or choose to battle a monster. The goal is to accumulate enough gold to buy the ring in the shop. If the player gets the ring or dies, the game is over.
 </li>
 
 <li><strong>Prototype goal:</strong>
@@ -75,11 +75,11 @@ Everyone 10 and up who has interest in turn-based RPGs, flash games, or Valentin
 </li>
 
 <li><strong>Play time:</strong>
-5-10 mins.
+2-5 mins.
 </li>
 
 <li><strong>Strategies:</strong>
-Start small and try to build up money, buying better equipment and potions when necessary. Don't overestimate your own vitality and be prepared with potions.
+Start small and try to build up money, buying better equipment and potions when necessary. Be prepared with potions and only use them when you're near death. Sometimes taking risks is necessary.
 </li>
 
 <li><strong>Prototype Assets:</strong>
