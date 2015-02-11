@@ -274,6 +274,7 @@ main.prototype = {
 				shopGreet.visible = true;
 				shopmenu.visible = true;
 				topText.setText("Welcome to the shop!\nSee anything you like?");
+				rightText.setText("Get enough gold\nto buy the ring!");
 				buySword.visible = true;
 				buySpear.visible = true;
 				buyAxe.visible = true;
