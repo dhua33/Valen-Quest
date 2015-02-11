@@ -81,11 +81,15 @@ var main = function(game) {
     var battleNum;
     var mondie1;
     var mondie2;
+    var counterChance;
+    var counterPercent;
 };
 
 main.prototype = {
 		create: function() {
 				// set initial parameters
+				counterChance = 4;
+				counterPercent = 20;
 				playerHP = 10;
 				playerMaxHP = 10;
 				playerAtt = 4;
@@ -453,8 +457,8 @@ main.prototype = {
 		},
 		counter: function() {
 				randomNum = Math.random();
-				randomNum = Math.round((randomNum * 100)) % 10;
-				if(randomNum < 2) { // counter success
+				randomNum = Math.round((randomNum * 100)) % 20;
+				if(randomNum < counterChance) { // counter success
 						damage = playerAtt*5;
 						rightText.setText("Counter success!\nPlayer did " + damage + " damage.\nPlayer Turn.");
 						this.playerDamages();
@@ -467,13 +471,23 @@ main.prototype = {
 						damage = Math.round(damage*1.5);
 						this.monAttack();
 				}
+				counterChance = 4;
+				counterPercent = 20;
 				this.updatePlayer();
 		},
 		attack: function() {
 				damage = Math.round(Math.random()*100) % 10;
 				if (damage > 0) {
 						damage = playerAtt;
-						rightText.setText("Player attacked.\nPlayer did " + damage + " damage.\nPlayer Turn.");
+						if(counterChance < 7)
+						{	counterChance++;	}
+						if(counterChance === 5) {
+							counterPercent = 25;
+						} else if(counterChance === 6) {
+							counterPercent = 30;
+						} else if(counterChance === 7) 
+						{	counterPercent = 35; }
+						rightText.setText("Counter chance increased to " + counterPercent +"%\nPlayer did " + damage + " damage.\nPlayer Turn.");
 						this.playerDamages();
 				} else {
 						rightText.setText("Player Missed!\nPlayer turn.");
