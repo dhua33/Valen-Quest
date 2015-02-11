@@ -481,12 +481,7 @@ main.prototype = {
 						damage = playerAtt;
 						if(counterChance < 7)
 						{	counterChance++;	}
-						if(counterChance === 5) {
-							counterPercent = 25;
-						} else if(counterChance === 6) {
-							counterPercent = 30;
-						} else if(counterChance === 7) 
-						{	counterPercent = 35; }
+						counterPercent = counterChance*5;
 						rightText.setText("Counter chance increased to " + counterPercent +"%\nPlayer did " + damage + " damage.\nPlayer Turn.");
 						this.playerDamages();
 				} else {

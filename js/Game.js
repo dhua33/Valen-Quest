@@ -482,7 +482,7 @@ main.prototype = {
 						if(counterChance < 7)
 						{	counterChance++;	}
 						counterPercent = counterChance*5;
-						rightText.setText("Counter chance increased to " + counterPercent +"%\nPlayer did " + damage + " damage.\nPlayer Turn.");
+						rightText.setText("Counter chance increased \nto " + counterPercent +"%\nPlayer did " + damage + " damage.\nPlayer Turn.");
 						this.playerDamages();
 				} else {
 						rightText.setText("Player Missed!\nPlayer turn.");
@@ -537,7 +537,7 @@ main.prototype = {
 				playerHP = playerMaxHP;
 				// updates playerText
 				rightText.visible = true;
-				rightText.setText("Max HP: " + playerMaxHP + "\nClick on a shop or battle button.");
+				rightText.setText("Max HP: " + playerMaxHP + "\nClick on a \nshop or battle button.");
 				playerText.visible = true;
 				this.updatePlayer();
 		},
