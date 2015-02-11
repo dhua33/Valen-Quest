@@ -558,6 +558,7 @@ main.prototype = {
 				// text
 				topText.setText("Monster HP: " + currentMonHP);
 				rightText.setText("Player turn.\nChoose an action.");
+				counterChance = 4;
 		},
 		battle1: function() { // manage music
 				townMusic.stop();
