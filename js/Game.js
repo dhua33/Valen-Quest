@@ -430,7 +430,6 @@ main.prototype = {
 		playerDamages: function() {
 						slashFX.animations.play('attack');
 						attackSFX.play();
-						rightText.setText("Counter success!\nPlayer did " + damage + " damage.\nPlayer Turn.");
 						currentMonHP -= damage;
 						topText.setText("Monster HP: " + currentMonHP);
 		},
@@ -457,6 +456,7 @@ main.prototype = {
 				randomNum = Math.round((randomNum * 100)) % 10;
 				if(randomNum < 2) { // counter success
 						damage = playerAtt*5;
+						rightText.setText("Counter success!\nPlayer did " + damage + " damage.\nPlayer Turn.");
 						this.playerDamages();
 						if(currentMonHP < 1) {
 								this.killsMonster();
@@ -473,6 +473,7 @@ main.prototype = {
 				damage = Math.round(Math.random()*100) % 10;
 				if (damage > 0) {
 						damage = playerAtt;
+						rightText.setText("Player attacked.\nPlayer did " + damage + " damage.\nPlayer Turn.");
 						this.playerDamages();
 				} else {
 						rightText.setText("Player Missed!\nPlayer turn.");
@@ -519,7 +520,7 @@ main.prototype = {
 				if(mondie2)
 						battleBut2.visible = false;
 				shopBut.visible = true;
-				topText.setText("Town\nWhat to do now...");
+				topText.setText("Current Location: Town\nWhat to do now...");
 				actionText.visible = true;
 				townMusic.play();
 				townimg.visible = true;
@@ -527,7 +528,7 @@ main.prototype = {
 				playerHP = playerMaxHP;
 				// updates playerText
 				rightText.visible = true;
-				rightText.setText("Max HP: " + playerMaxHP);
+				rightText.setText("Max HP: " + playerMaxHP + "\nClick on a shop or battle button.");
 				playerText.visible = true;
 				this.updatePlayer();
 		},
